@@ -11,10 +11,10 @@ module DateQueries
 
   module ClassMethods
 
-    def date_querify(*querify_fields)
+    def date_queries_for(*query_fields)
 
       # setting the scope types according to ActiveRecord version
-      querify_fields.each do |field|
+      query_fields.each do |field|
         raise ArgumentError, "Column '#{field}' does not exist in '#{self.name}' model." unless self.column_names.include?(field.to_s)
         ScopeDefiner.define_scopes_for(field, self)
       end

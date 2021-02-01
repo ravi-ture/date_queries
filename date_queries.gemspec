@@ -1,29 +1,26 @@
-$:.push File.expand_path("../lib", __FILE__)
+require_relative 'lib/date_queries/version'
 
-# Maintain your gem's version:
-require "date_queries/version"
+Gem::Specification.new do |spec|
+  spec.name          = "date_queries"
+  spec.version       = DateQueries::VERSION
+  spec.authors       = ["Ravi Ture"]
+  spec.email         = ["raviture@gmail.com"]
 
-# Describe your gem and declare its dependencies:
-Gem::Specification.new do |s|
-  s.name        = "date_queries"
-  s.version     = DateQueries::VERSION
-  s.authors     = ["Allerin Test Gem"]
-  s.email       = ["redmine@allerin.com"]
-  s.homepage    = ""
-  s.summary     = "A gem for date related queries"
-  s.description = "Provides scopes for date related queries, such as records between dates with year/month skipped."
+  spec.summary       = %q{A gem for date related database queries}
+  spec.description   = %q{Provides scopes for date related database queries, such as records between dates with year/month skipped.}
+  spec.homepage      = "https://github.com/ravi-ture/date_queries"
+  spec.license       = "MIT"
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
-  s.rubyforge_project = "date_queries"
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = "https://github.com/ravi-ture/date_queries"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
-
-
-  s.add_dependency "rails", "~> 4.0.2"
-
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  end
+  spec.bindir        = "exe"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
 end
